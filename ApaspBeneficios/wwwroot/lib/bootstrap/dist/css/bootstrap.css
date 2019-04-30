@@ -1124,6 +1124,11 @@ img {
   max-width: 100%;
   height: auto;
 }
+/*-------------------*/
+.carousel-inner img {
+    margin: auto;
+}
+/*-------------------------*/
 .img-rounded {
   border-radius: 6px;
 }
@@ -6312,6 +6317,7 @@ button.close {
 }
 .carousel {
   position: relative;
+
 }
 .carousel-inner {
   position: relative;

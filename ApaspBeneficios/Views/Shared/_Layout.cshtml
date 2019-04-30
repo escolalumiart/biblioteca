@@ -4,10 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ApaspBeneficios</title>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <link href="~/lib/bootstrap/dist/css/simple-sidebar.css" rel="stylesheet" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
@@ -15,10 +17,120 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+    <script>
+        $(document).ready(function () {
+            $("#ToggleSideMenu").click(function (e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('[tool-tip-toggle="tooltip-demo"]').tooltip({
+
+                placement: 'bottom'
+
+            });
+
+        });
+
+    </script>
+
+    @*'*************************************************'*@
+
+    @*inserido*@
+
+
+    @*'*************************************************'*@
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            //Set Default State of each portfolio piece
+            $(".paging").show();
+            $(".paging a:first").addClass("active");
+
+            //Get size of images, how many there are, then determin the size of the image reel.
+            var imageWidth = $(".window").width();
+            var imageSum = $(".image_reel img").size();
+            var imageReelWidth = imageWidth * imageSum;
+
+            //Adjust the image reel to its new size
+            $(".image_reel").css({ 'width': imageReelWidth });
+
+            //Paging + Slider Function
+            rotate = function () {
+                var triggerID = $active.attr("rel") - 1; //Get number of times to slide
+                var image_reelPosition = triggerID * imageWidth; //Determines the distance the image reel needs to slide
+
+                $(".paging a").removeClass('active'); //Remove all active class
+                $active.addClass('active'); //Add active class (the $active is declared in the rotateSwitch function)
+
+                //Slider Animation
+                $(".image_reel").animate({
+                    left: -image_reelPosition
+                }, 500);
+
+            };
+
+            //Rotation + Timing Event
+            rotateSwitch = function () {
+                play = setInterval(function () { //Set timer - this will repeat itself every 3 seconds
+                    $active = $('.paging a.active').next();
+                    if ($active.length === 0) { //If paging reaches the end...
+                        $active = $('.paging a:first'); //go back to first
+                    }
+                    rotate(); //Trigger the paging and slider function
+                }, 7000); //Timer speed in milliseconds (3 seconds)
+            };
+
+            rotateSwitch(); //Run function on launch
+
+            //On Hover
+            $(".image_reel a").hover(function () {
+                clearInterval(play); //Stop the rotation
+            }, function () {
+                rotateSwitch(); //Resume rotation
+            });
+
+            //On Click
+            $(".paging a").click(function () {
+                $active = $(this); //Activate the clicked paging
+                //Reset Timer
+                clearInterval(play); //Stop the rotation
+                rotate(); //Trigger rotation immediately
+                rotateSwitch(); // Resume rotation
+                return false; //Prevent browser jump to link anchor
+            });
+
+        });
+
+    </script>
+
+    <script type='text/javascript'>
+        //        sitePath = 'http://vanessaluiza.com/_utilidades/script/let-it-snow/';
+        sitePath = 'http://apasp.com.br/';
+        sflakesMax = 0.15;
+        sflakesMaxActive = 110;
+        svMaxX = 1;
+        svMaxY = 1;
+        ssnowStick = 0;
+        sfollowMouse = 1;
+    </script>
+
+    @*'*************************************************'*@
+
+
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+       <nav class="navbar navbar-inverse  navbar-fixed-top" style="background-color:firebrick;">
+        
         <div class="container">
+
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -26,13 +138,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">ApaspBeneficios</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand"><span>Apasp Beneficios</span></a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="About">Sobre nós</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contato</a></li>
                 </ul>
                 <partial name="_LoginPartial" />
             </div>
@@ -41,12 +153,78 @@
 
     <partial name="_CookieConsentPartial" />
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2019 - ApaspBeneficios</p>
-        </footer>
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper" class="navbar navbar-inverse " style="background-color:firebrick;">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand"><a href="#">Painel de Controle </a></li>
+                @*<li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>*@
+                <li><a asp-area="" asp-controller="Home" asp-action="Contact"><span class="glyphicon glyphicon-edit" tool-tip-toggle="tooltip-demo" data-original-title="Atendimento"></span>Atendimento</a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="Beneficios"><span class="glyphicon glyphicon-list" tool-tip-toggle="tooltip-demo" data-original-title="Rede Credenciada"></span>Rede Credenciada</a></li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+
+        <div id="page-content-wrapper"  style="background-color:lemonchiffon;">
+            @************************ bloco modelo dataprev   *@
+            <div class="header-main"  style="background-color:lemonchiffon;">
+                <div class="row">
+                    <div class="col-md-8 info">
+                        <div class="site-info">
+                            <a class="logo navbar-btn pull-left" href="/" title="Página inicial">
+                                <h1 class="site-name"><img src="~/images/logo_apasp_benefícios_novo.png" alt="Logotipo Apasp" /></h1>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="margin-top:10px;">
+                        <div class="search">
+                            <div class="region region-search">
+                                <div id="block-search-form" class="block block-search block-no-title clearfix">
+
+                                    <div class="content">
+                                        <form class="form-search content-search" action="/home/contato" method="post" id="search-block-form" accept-charset="UTF-8">
+                                            <div>
+                                                <div>
+                                                    <div class="social">
+                                                        <div class="region region-social-links">
+                                                            <div id="block-block-83" class="block block-block block-linkssociais block-no-title clearfix">
+
+                                                                <div class="content">
+                                                                    <ul class="menu list-inline">
+                                                                        <li class="leaf first"><a href="http://www.facebook.com/apaspbeneficios"><img alt="Facebook" src="/images/midias_sociais/facebook.png" style="width: 19px; height: 19px;" title="Facebook" /></a></li>
+                                                                        <li class="leaf"><a href="http://www.twitter.com/apaspbeneficios"><img alt="Twitter" src="/images/midias_sociais/twitter.png" style="width: 20px; height: 19px;" title="Twitter" /></a></li>
+                                                                        <li class="leaf"><a href="https://www.youtube.com/user/apaspbeneficios"><img alt="Youtube" src="/images/midias_sociais/youtube.gif" style="width: 19px; height: 19px;" title="Youtube" /></a></li>
+                                                                        <li class="leaf"><a href="https://www.linkedin.com/company-beta/10790205/"><img alt="Linkedin" src="/images/midias_sociais/icolinkedinazul.gif" style="width: 19px; height: 19px;" title="Linkedin" /></a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div> <!-- /.block -->
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div> <!-- /.block -->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            @************************ bloco modelo dataprev   *@
+            <br />
+            <a href="#ToggleSideMenu" class="btn btn-default" id="ToggleSideMenu">Painel</a>
+
+            @RenderBody()
+          
+            <footer >
+                <p>&copy; 2019 - Brasnetec - Tecnologia e Serviços</p>
+            </footer>
+        </div>
+        <!-- /#page-content-wrapper -->
     </div>
 
     <environment include="Development">

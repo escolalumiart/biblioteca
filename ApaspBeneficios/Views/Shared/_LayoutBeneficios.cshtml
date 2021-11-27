@@ -1,0 +1,316 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EscolaLumiart</title>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link href="~/lib/bootstrap/dist/css/simple-sidebar.css" rel="stylesheet" />
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link href="~/lib/bootstrap/dist/css/simple-sidebar.css" rel="stylesheet" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+    <script>
+        $(document).ready(function () {
+            $("#ToggleSideMenu").click(function (e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('[tool-tip-toggle="tooltip-demo"]').tooltip({
+
+                placement: 'bottom'
+
+            });
+
+        });
+
+    </script>
+
+    @*'*************************************************'*@
+
+    @*inserido*@
+
+
+    @*'*************************************************'*@
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            //Set Default State of each portfolio piece
+            $(".paging").show();
+            $(".paging a:first").addClass("active");
+
+            //Get size of images, how many there are, then determin the size of the image reel.
+            var imageWidth = $(".window").width();
+            var imageSum = $(".image_reel img").size();
+            var imageReelWidth = imageWidth * imageSum;
+
+            //Adjust the image reel to its new size
+            $(".image_reel").css({ 'width': imageReelWidth });
+
+            //Paging + Slider Function
+            rotate = function () {
+                var triggerID = $active.attr("rel") - 1; //Get number of times to slide
+                var image_reelPosition = triggerID * imageWidth; //Determines the distance the image reel needs to slide
+
+                $(".paging a").removeClass('active'); //Remove all active class
+                $active.addClass('active'); //Add active class (the $active is declared in the rotateSwitch function)
+
+                //Slider Animation
+                $(".image_reel").animate({
+                    left: -image_reelPosition
+                }, 500);
+
+            };
+
+            //Rotation + Timing Event
+            rotateSwitch = function () {
+                play = setInterval(function () { //Set timer - this will repeat itself every 3 seconds
+                    $active = $('.paging a.active').next();
+                    if ($active.length === 0) { //If paging reaches the end...
+                        $active = $('.paging a:first'); //go back to first
+                    }
+                    rotate(); //Trigger the paging and slider function
+                }, 7000); //Timer speed in milliseconds (3 seconds)
+            };
+
+            rotateSwitch(); //Run function on launch
+
+            //On Hover
+            $(".image_reel a").hover(function () {
+                clearInterval(play); //Stop the rotation
+            }, function () {
+                rotateSwitch(); //Resume rotation
+            });
+
+            //On Click
+            $(".paging a").click(function () {
+                $active = $(this); //Activate the clicked paging
+                //Reset Timer
+                clearInterval(play); //Stop the rotation
+                rotate(); //Trigger rotation immediately
+                rotateSwitch(); // Resume rotation
+                return false; //Prevent browser jump to link anchor
+            });
+
+        });
+
+    </script>
+
+    <script type='text/javascript'>
+        //        sitePath = 'http://vanessaluiza.com/_utilidades/script/let-it-snow/';
+        sitePath = 'http://apasp.com.br/';
+        sflakesMax = 0.15;
+        sflakesMaxActive = 110;
+        svMaxX = 1;
+        svMaxY = 1;
+        ssnowStick = 0;
+        sfollowMouse = 1;
+    </script>
+
+    @*'*************************************************'*@
+
+
+</head>
+<body>
+    @*<nav class="navbar navbar-inverse  navbar-fixed-top" style="background-color: #f6c828" ;">*@
+    <nav class="navbar navbar-inverse   navbar-fixed-top " style="background-color: firebrick ; color:  #f6c828">
+
+        <div class="container">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand"><span>Apasp Beneficios</span></a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    @*<li><a asp-area="" asp-controller="Home" asp-action="About">Sobre nós</a></li>*@
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-submenu">
+
+                            <a class="test saude" tabindex="-1" href="#"><span class="glyphicon glyphicon-heart-empty" tool-tip-toggle="tooltip-demo" data-original-title="Saude"></span>  Saúde <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                @*<li><a tabindex="-1" href="#">Médicos</a></li>*@
+                                <li><a tabindex="-1" href="#">Dentistas</a></li>
+                                <li class="dropdown-submenu">
+                                    <a class="test diagnosticos" href="#">Diagnósticos <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Análise Clínicas</a></li>
+                                        <li><a href="#">Imagens</a></li>
+
+                                    </ul>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <a class="test medicos dropdown-toggle" href="#">Médicos <span class="caret"></span></a>
+
+                                    <ul class="dropdown-menu scrollable-menu" role="menu">
+                                        @*<li><a href="#">Anestesista</a></li>*@
+
+                                        <li><a asp-area="Administracao" asp-controller="Credenciados" asp-action="GetPorCategoria" asp-route-especialidade="Anestesista"> Anestesista</a></li>
+                                        <li><a href="#">Cardiologista</a></li>
+                                        <li><a href="#">Cirurgia Cabeça e Pescoço</a></li>
+                                        <li><a href="#">Cirurgião Vascular</a></li>
+                                        <li><a href="#">Clínico Geral</a></li>
+                                        <li><a href="#">Dermatologista</a></li>
+                                        <li><a href="#">Endocrinologista</a></li>
+                                        <li><a href="#">Fonoaudiólogo</a></li>
+                                        <li><a href="#">Gastroenterologista</a></li>
+                                        <li><a href="#">Geriatra</a></li>
+                                        <li><a href="#">Ginecologista</a></li>
+                                        <li><a href="#">Hematologista</a></li>
+                                        <li><a href="#">Hepatologista</a></li>
+                                        <li><a href="#">Infectologista</a></li>
+                                        <li><a href="#">Medicina Esportiva</a></li>
+                                        <li><a href="#">Neurocirurgião</a></li>
+                                        <li><a href="#">Nefrologista</a></li>
+                                        <li><a href="#">Neurologista</a></li>
+                                        <li><a href="#">Neurorradiologia</a></li>
+                                        <li><a href="#">Nutricionista</a></li>
+                                        <li><a href="#">Otorinolaringologista</a></li>
+                                        <li><a href="#">Pediatria</a></li>
+                                        <li><a href="#">Pneumologista</a></li>
+                                        <li><a href="#">Psicólogo</a></li>
+                                        <li><a href="#">Obstetrícia</a></li>
+                                        <li><a href="#">Oncologista</a></li>
+                                        <li><a href="#">Ortopedista</a></li>
+                                        <li><a href="#">Urologista</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown-submenu">
+                            <a class="test" tabindex="-1" href="#"><span class="glyphicon glyphicon-education" tool-tip-toggle="tooltip-demo" data-original-title="Educação"></span>  Educação <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a tabindex="-1" href="#">Idiomas</a></li>
+                                <li><a tabindex="-1" href="#">Universidades</a></li>
+                                <li><a tabindex="-1" href="#">Cursos</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a tabindex="-1" href="#"><span class="glyphicon glyphicon-glass" tool-tip-toggle="tooltip-demo" data-original-title="Lazer"></span>  Lazer</a></li>
+
+
+                        <li class="dropdown-submenu">
+                            <a class="test saude" tabindex="-1" href="#"><span class="glyphicon glyphicon-shopping-cart" tool-tip-toggle="tooltip-demo" data-original-title="Outros"></span>  Outros <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a tabindex="-1" href="#">Jurídico</a></li>
+                                <li><a tabindex="-1" href="#">Supermercados</a></li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contato</a></li>
+                    @*<li><a href="#ToggleSideMenu"  class="btn btn-default" id="ToggleSideMenu" style="width:auto;max-width:150px; margin-left:15px">Painel de controle</a></li>*@
+                </ul>
+                <partial name="_LoginPartial" />
+            </div>
+        </div>
+    </nav>
+
+    <partial name="_CookieConsentPartial" />
+
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper" class="navbar navbar-inverse " style="background-color:firebrick;">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand"><a href="#">Painel de Controle </a></li>
+                @*<li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>*@
+                @*<li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Cadastros <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Clientes", "Cliente", "Cadastro")</li>
+                            <li>@Html.ActionLink("Fornecedores", "Fornecedor", "Cadastro")</li>
+                            <li>@Html.ActionLink("Países", "Pais", "Cadastro")</li>
+                            <li>@Html.ActionLink("Estados", "Estado", "Cadastro")</li>
+                            <li>@Html.ActionLink("Cidades", "Cidade", "Cadastro")</li>
+                        </ul>
+                    </li>*@
+
+                <li class="dropdown">
+                    <a asp-area="" asp-controller="#" asp-action="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-edit" tool-tip-toggle="tooltip-demo" data-original-title="Central de Atendimento"></span> Central de Atendimento<b class="caret"></b></a>
+                    <ul class="dropdown-menu" style="margin-left:30px;">
+                        <li><a asp-area="Atendimento" asp-controller="Beneficiario" asp-action="Index">ao Beneficiário</a></li>
+                        <li><a asp-area="Atendimento" asp-controller="Credenciado" asp-action="Index">ao Credenciado</a></li>
+                        <li><a asp-area="Atendimento" asp-controller="Corretor" asp-action="Index">ao Corretor</a></li>
+                        <li class="divider"></li>
+                        <li><a asp-area="Atendimento" asp-controller="Administracao" asp-action="Index">ao Administrador</a></li>
+                    </ul>
+                </li>
+                <li><a asp-area="" asp-controller="Home" asp-action="Beneficios"><span class="glyphicon glyphicon-list" tool-tip-toggle="tooltip-demo" data-original-title="Rede Credenciada"></span> Rede Credenciada</a></li>
+                <li><a asp-area="Administracao" asp-controller="Home" asp-action="Index"><span class="glyphicon glyphicon-user" tool-tip-toggle="tooltip-demo" data-original-title="Administração"></span> Administração</a></li>
+            </ul>
+
+        </div>
+
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+
+        <div id="page-content-wrapper" style="background-color:lemonchiffon;">
+            <div>
+                <a href="#ToggleSideMenu" class="btn btn-danger" id="ToggleSideMenu"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span> Painel de Controle</a>
+            </div>
+            <div style="align-content:center">
+                <h3>Rede Credenciada</h3>
+            </div>
+            
+            @RenderBody()
+
+            <footer>
+                <br />
+                <p>&copy; 2019 - Brasnetec - Tecnologia e Serviços</p>
+            </footer>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

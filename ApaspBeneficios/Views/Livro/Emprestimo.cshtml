@@ -1,0 +1,115 @@
+﻿@model EscolaLumiart.Models.Dtos.LivroDto
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Emprestimo";
+}
+
+<h2>Emprestimo</h2>
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Autor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Autor)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Editora)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Editora)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StatusLivroId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StatusLivroId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn bottom-right" href="#"  data-toggle="modal" data-target=".encaminhamento">
+        <span class="glyphicon glyphicon-list" tool-tip-toggle="ficha de emprestimo" data-original-title="Emprestimo"></span>
+        Emprestimo
+    </a>
+    <a asp-action="Acervo">Voltar</a>
+</div>
+<div class="modal fade encaminhamento">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h1 class="site-name"><img src="~/images/Lumiart/lumi_banner.png" alt="Logotipo lumiart" /></h1>
+                @*<h2 style="text-align:center">Guia Nº: @Model.Id  - 201901" </h2>*@
+                <h2 style="text-align:center">Emprestimo de Livro </h2>
+                <br />
+                <button data-dismiss="modal" class="close"><span>&times;</span></button>
+                <div class="modal-title"><h4>Livro: <strong><b>@Model.Nome</b></strong></h4></div>
+
+                <div class="modal-title"><h5>Autor: <strong>@Model.Autor</strong></h5></div>
+                <div class="modal-title"><h5>Editora: <strong>@Model.Editora</strong></h5></div>
+            </div>
+
+            <div class="modal-body">
+                @{
+                    DateTime thisDay = DateTime.Today;
+                    DateTime validade = DateTime.Today.AddDays(15);
+                    @*<p> Data do Emprestimo: <strong>@thisDay.ToString("dd/MM/yyyy")</strong> - Data de Devolução: <strong>@validade.ToString("dd/MM/yyyy")</strong></p>*@
+                }
+                <hr />
+
+                <p>
+                    
+                    Prezado usuario,  Sr(a): <strong> @UserManager.GetUserName(User) </strong>
+                </p>
+                <p> Você está retirando do nosso acervo nesta data: <strong>@thisDay.ToString("dd/MM/yyyy")</strong> o livro acima se comprometendo a 
+                entrega-lo em: <strong>@validade.ToString("dd/MM/yyyy")</strong>
+              </p>
+                <hr />
+                <h4>Dados do Cliente:</h4>
+                <hr />
+                @*<p>Sexo: <strong>Masculino</strong> -  Idade: <strong> 60 anos</strong></p>*@
+                @*<p>Endereço: <strong>@Model.Endereco - @Model.Bairro - @Model.Cidade  - @Model.UF - @Model.CEP</strong></p>
+                    <p>Telefone: <strong>@Model.Telefone</strong></p>
+                    <p>Email: <strong>@Model.Email</strong></p>*@
+                <hr />
+                <br /><br />
+                Assinatura:_____________________________________
+
+
+            </div>
+            <div class="modal-footer">
+                @*<button class="btn btn-primary">Submit</button>*@
+                <strong>Escola Lumiart</strong><br />
+                Av. Rui Barbosa, 2016<br />
+                Centro - Carapicuiba - SP - CEP: 06311-000<br />
+                <abbr title="Telefones:"></abbr>
+                <p>Telefone: (11) 95604-8384</p>
+                <p>Email: atendimento@escolalumiart.com.br</p>
+                <br />
+
+                <button class="btn btn-primary" data-dismiss="modal">Imprime</button>
+                <button class="btn btn-default" data-dismiss="modal">Retorna</button>
+            </div>
+        </div>
+    </div>
+</div>

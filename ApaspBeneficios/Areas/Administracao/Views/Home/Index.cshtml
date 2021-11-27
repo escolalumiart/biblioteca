@@ -1,0 +1,44 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container" style="margin-top:10px;">
+    <div class="jumbotron">
+        <h2>Área Administrativa</h2>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Olá @UserManager.GetUserName(User)!</a>
+        }
+    </div>
+    <nav class="navbar navbar-inverse" style="background-color:firebrick;">
+        <div class="container-fluid">
+            
+            <ul class="nav navbar-nav">
+                <li><a asp-area="" asp-controller="Livro" asp-action="List">Livros</a></li>
+                <li><a asp-area="" asp-controller="Cliente" asp-action="List">Clientes</a></li>
+                <li><a href="#">Usuario</a></li>
+
+                @*<li class="dropdown">
+            <a class="dropdown-toggle active" data-toggle="dropdown" href="#">
+                Cadastros
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a asp-area="Administracao" asp-controller="Beneficiarios" asp-action="Index">Beneficiários</a></li>
+                <li><a asp-area="Administracao" asp-controller="Dependentes" asp-action="Index">Dependentes</a></li>
+                <li><a asp-area="Administracao" asp-controller="Credenciados" asp-action="Index">Credenciados</a></li>
+
+            </ul>
+        </li>*@
+                
+            </ul>
+        </div>
+    </nav>
+    
+</div>
+
+

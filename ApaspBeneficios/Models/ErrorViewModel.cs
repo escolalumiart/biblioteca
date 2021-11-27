@@ -1,6 +1,6 @@
 using System;
 
-namespace ApaspBeneficios.Models
+namespace EscolaLumiart.Models
 {
     public class ErrorViewModel
     {

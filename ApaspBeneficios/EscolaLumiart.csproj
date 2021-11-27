@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>aspnet-EscolaLumiart-65E76BF3-5A32-4E0A-A3B9-78893919CFBA</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20190521131618_Inclui_Especialidade_No_Credenciado.cs" />
+    <Compile Remove="Data\Migrations\20190521131618_Inclui_Especialidade_No_Credenciado.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.1.7" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.14">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.4.10" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Administracao\Data\" />
+    <Folder Include="Areas\Administracao\Models\" />
+    <Folder Include="Areas\Atendimento\Data\" />
+    <Folder Include="Areas\Atendimento\Models\" />
+    <Folder Include="Areas\Biblioteca\Controllers\" />
+    <Folder Include="Areas\Biblioteca\Models\" />
+    <Folder Include="Areas\Biblioteca\Views\" />
+    <Folder Include="Areas\Identity\Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Contatos\Create.cshtml" />
+    <None Include="Views\Contatos\Delete.cshtml" />
+    <None Include="Views\Contatos\Details.cshtml" />
+    <None Include="Views\Contatos\Edit.cshtml" />
+    <None Include="Views\Contatos\Index.cshtml" />
+    <None Include="Areas\Atendimento\Views\Home\Index.cshtml" />
+    <None Include="Areas\Atendimento\Views\_ViewImports.cshtml" />
+    <None Include="Areas\Atendimento\Views\_ViewStart.cshtml" />
+  </ItemGroup>
+
+</Project>

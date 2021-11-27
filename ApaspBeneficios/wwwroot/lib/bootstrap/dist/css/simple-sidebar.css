@@ -92,7 +92,8 @@
         .sidebar-nav li a {
             display: block;
             text-decoration: none;
-            color: #999999;
+            /*color: #999999;*/
+            color: #b6ff00;
         }
 
 

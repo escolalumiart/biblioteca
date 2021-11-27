@@ -3620,6 +3620,14 @@ tbody.collapse.in {
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
 }
+
+
+@media (min-width:768px){
+   .dropdown-menu{
+        min-width:460px;
+    }
+}
+
 .dropdown-menu.pull-right {
   right: 0;
   left: auto;

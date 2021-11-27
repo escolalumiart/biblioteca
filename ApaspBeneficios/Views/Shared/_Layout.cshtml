@@ -3,12 +3,22 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ApaspBeneficios</title>
-    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <title>@ViewData["Title"] - EscolaLumiart</title>
 
+    @*------------------   jquery para autocomplete *@
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    @* -------------------- jquery para autocomplete *@
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    @* -----------------------------------------------*@
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css" />
+    @*------------------  ------------------------- *@
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link href="~/lib/bootstrap/dist/css/simple-sidebar.css" rel="stylesheet" />
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link href="~/lib/bootstrap/dist/css/simple-sidebar.css" rel="stylesheet" />
     </environment>
     <environment exclude="Development">
@@ -36,6 +46,18 @@
 
             });
 
+        });
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('.dropdown-submenu a.test').on("click", function (e) {
+                $(this).parent().parent().find('.dropdown-menu').hide();
+                $(this).next('ul').toggle();
+                e.stopPropagation();
+                e.preventDefault();
+            });
         });
 
     </script>
@@ -112,8 +134,8 @@
     </script>
 
     <script type='text/javascript'>
-        //        sitePath = 'http://vanessaluiza.com/_utilidades/script/let-it-snow/';
-        sitePath = 'http://apasp.com.br/';
+
+        sitePath = 'http://escolalumiart.com.br/';
         sflakesMax = 0.15;
         sflakesMaxActive = 110;
         svMaxX = 1;
@@ -121,14 +143,29 @@
         ssnowStick = 0;
         sfollowMouse = 1;
     </script>
+    <style>
+        .dropdown-submenu {
+            position: relative;
+        }
+
+            .dropdown-submenu .dropdown-menu {
+                top: 0;
+                left: 100%;
+                margin-top: -1px;
+            }
+    </style>
 
     @*'*************************************************'*@
 
 
 </head>
 <body>
-       <nav class="navbar navbar-inverse  navbar-fixed-top" style="background-color:firebrick;">
-        
+    @*<nav class="navbar navbar-inverse  navbar-fixed-top" style="background-color: #f6c828" ;">*@
+
+
+    @*<nav class="navbar navbar-inverse   navbar-fixed-top " style="background-color: #E7c800 ; color:  #f6c828">*@
+    <nav class="navbar navbar-inverse   navbar-fixed-top ">
+        @*firebrick*@
         <div class="container">
 
             <div class="navbar-header">
@@ -138,13 +175,22 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand"><span>Apasp Beneficios</span></a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand"><span> <img src="~/images/Lumiart/avatar.png" alt="Avatar" height="50" width="50" />  Escola Lumiart</span></a>
             </div>
-            <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse" role="navigation">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">Sobre nós</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contato</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index" style="color: #b6ff00">Home</a></li>
+                    
+                    @*<li><a asp-area="" asp-controller="Home" asp-action="About">Sobre nós</a></li>*@
+                    @*<li><a asp-area="" asp-controller="Home" asp-action="Contact" style="color: #b6ff00">Contato</a></li>*@
+                    <li><a asp-area="" asp-controller="Home" asp-action="Beneficios" style="color: #b6ff00"><span class="glyphicon glyphicon-list" tool-tip-toggle="tooltip-demo" data-original-title="Galeria"></span> Galeria</a></li>
+                    <li><a asp-area="Administracao" asp-controller="Home" style="color: #b6ff00" data-toggle="modal" data-target=".listacredenciados"><span class="glyphicon glyphicon-list-alt" tool-tip-toggle="tooltip-demo" data-original-title="Cursos"></span> Cursos</a></li>
+                    <li><a href="#ToggleSideMenu" id="ToggleSideMenu" style="color: #b6ff00"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>Painel de controle</a></li>
+
+                    <li><a asp-area="Administracao" asp-controller="Home" data-toggle="modal" data-target=".contato" style="color: #b6ff00"><span class="glyphicon glyphicon-list-alt" tool-tip-toggle="tooltip-demo" data-original-title="Contato"></span> Contato</a></li>
+
+
+
                 </ul>
                 <partial name="_LoginPartial" />
             </div>
@@ -155,73 +201,153 @@
 
     <div id="wrapper">
         <!-- Sidebar -->
-        <div id="sidebar-wrapper" class="navbar navbar-inverse " style="background-color:firebrick;">
+        @*<div id="sidebar-wrapper" class="navbar navbar-inverse " style="background-color: #E7c800;">*@
+        <div id="sidebar-wrapper" class="navbar navbar-inverse ">
+            <br />
             <ul class="sidebar-nav">
-                <li class="sidebar-brand"><a href="#">Painel de Controle </a></li>
-                @*<li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>*@
-                <li><a asp-area="" asp-controller="Home" asp-action="Contact"><span class="glyphicon glyphicon-edit" tool-tip-toggle="tooltip-demo" data-original-title="Atendimento"></span>Atendimento</a></li>
-                <li><a asp-area="" asp-controller="Home" asp-action="Beneficios"><span class="glyphicon glyphicon-list" tool-tip-toggle="tooltip-demo" data-original-title="Rede Credenciada"></span>Rede Credenciada</a></li>
+
+                <li class="sidebar-brand"><a href="#"> </a></li>
+
+                <li><a asp-area="Administracao" asp-controller="Home" asp-action="Index"><span class="glyphicon glyphicon-user" tool-tip-toggle="tooltip-demo" data-original-title="Administração"></span> Administração</a></li>
+                <li><a asp-area="" asp-controller="Livro" asp-action="Acervo" style="color: #b6ff00"><span class="glyphicon glyphicon-list" tool-tip-toggle="tooltip-demo" data-original-title="Central de Atendimento"></span> Biblioteca</a></li>
+
             </ul>
+
         </div>
+
         <!-- /#sidebar-wrapper -->
         <!-- Page Content -->
 
-        <div id="page-content-wrapper"  style="background-color:lemonchiffon;">
+        <div id="page-content-wrapper" style="background-color:lemonchiffon;">
             @************************ bloco modelo dataprev   *@
-            <div class="header-main"  style="background-color:lemonchiffon;">
+            <div class="header-main" style="background-color:lemonchiffon;">
                 <div class="row">
-                    <div class="col-md-8 info">
+                    <div class="col-md-6 info">
                         <div class="site-info">
-                            <a class="logo navbar-btn pull-left" href="/" title="Página inicial">
-                                <h1 class="site-name"><img src="~/images/logo_apasp_benefícios_novo.png" alt="Logotipo Apasp" /></h1>
-                            </a>
+                            @*<a class="logo navbar-btn pull-left" href="/" title="Página inicial">
+                                    <h1 class="site-name"><img src="~/images/Lumiart/lumi_banner.png" alt="banner lumiart" /></h1>
+                                </a>*@
+
                         </div>
                     </div>
-                    <div class="col-md-4" style="margin-top:10px;">
-                        <div class="search">
-                            <div class="region region-search">
-                                <div id="block-search-form" class="block block-search block-no-title clearfix">
 
-                                    <div class="content">
-                                        <form class="form-search content-search" action="/home/contato" method="post" id="search-block-form" accept-charset="UTF-8">
-                                            <div>
-                                                <div>
-                                                    <div class="social">
-                                                        <div class="region region-social-links">
-                                                            <div id="block-block-83" class="block block-block block-linkssociais block-no-title clearfix">
+                </div>
+            </div>
+            
+            
+            
 
-                                                                <div class="content">
-                                                                    <ul class="menu list-inline">
-                                                                        <li class="leaf first"><a href="http://www.facebook.com/apaspbeneficios"><img alt="Facebook" src="/images/midias_sociais/facebook.png" style="width: 19px; height: 19px;" title="Facebook" /></a></li>
-                                                                        <li class="leaf"><a href="http://www.twitter.com/apaspbeneficios"><img alt="Twitter" src="/images/midias_sociais/twitter.png" style="width: 20px; height: 19px;" title="Twitter" /></a></li>
-                                                                        <li class="leaf"><a href="https://www.youtube.com/user/apaspbeneficios"><img alt="Youtube" src="/images/midias_sociais/youtube.gif" style="width: 19px; height: 19px;" title="Youtube" /></a></li>
-                                                                        <li class="leaf"><a href="https://www.linkedin.com/company-beta/10790205/"><img alt="Linkedin" src="/images/midias_sociais/icolinkedinazul.gif" style="width: 19px; height: 19px;" title="Linkedin" /></a></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div> <!-- /.block -->
-                                                        </div>
-                                                    </div>
-                                                    
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div> <!-- /.block -->
+            <div class="modal fade listacredenciados">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button data-dismiss="modal" class="close"><span>&times;</span></button>
+
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="row" style="border-radius: 20px; border-bottom-color:white; align-content:center">
+
+                                <div class="col-md-12">
+
+                                    <img src="~/images/Lumiart/Galeria/lumiart_cursos.jpg" alt="DÉL_LUMIART-1.jpg" class="img-responsive" />
+
+                                </div>
                             </div>
                         </div>
-
+                        <div class="modal-footer">
+                            @*<button class="btn btn-primary">Submit</button>*@
+                            <button class="btn btn-default" data-dismiss="modal">Retorna</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            @************************ bloco modelo dataprev   *@
-            <br />
-            <a href="#ToggleSideMenu" class="btn btn-default" id="ToggleSideMenu">Painel</a>
+
+
+
+            <div class="modal fade contato">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button data-dismiss="modal" class="close"><span>&times;</span></button>
+
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="row" style="border-radius: 20px; border-bottom-color:white; align-content:center">
+
+                                <div class="col-md-12">
+
+                                    <img src="~/images/Lumiart/Galeria/lumiart_contato.jpg" alt="lumiart_contato.jpg" class="img-responsive" />
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <h3><strong>Endereço:</strong></h3>
+                            <address>
+
+
+                                <b>Av.Rui Barbosa, 2016</b><br />
+                                Centro - Carapicuíba- SP - CEP: 06311-000<br />
+                                <abbr title="Telefones:"></abbr>
+                                <p>
+                                    Tel::(11) 95604-8384
+                                    <img src="~/images/whats2.png" style="height:20px; width:20px; margin-top:-20px" />
+
+                                </p>
+                                <p> e-mail: <a href="mailto:atendimento@escolalumiart.com.br">atendimento@escolalumiart.com.br</a> </p>
+                                @*<p><b>ATENDIMENTO SOMENTE POR TELEFONE</b></p>*@
+                            </address>
+                        </div>
+                        <div class="modal-footer">
+                            @*<button class="btn btn-primary">Submit</button>*@
+                            <button class="btn btn-default" data-dismiss="modal">Retorna</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             @RenderBody()
-          
-            <footer >
-                <p>&copy; 2019 - Brasnetec - Tecnologia e Serviços</p>
+
+            <footer>
+                <div class="col-md-4" style="margin-top:10px;">
+                    <div class="search">
+                        <div class="region region-search">
+                            <div id="block-search-form" class="block block-search block-no-title clearfix">
+
+                                <div class="content">
+                                    <form class="form-search content-search" action="/home/contato" method="post" id="search-block-form" accept-charset="UTF-8">
+                                        <div>
+                                            <div>
+                                                <div class="social" style="margin-top:20px; padding-left:10px;">
+                                                    <div class="region region-social-links">
+                                                        <div id="block-block-83" class="block block-block block-linkssociais block-no-title clearfix">
+
+                                                            <div class="content">
+                                                                <ul class="menu list-inline">
+                                                                    <li class="leaf first"><a href="https://business.facebook.com/escolalumiart/"><img alt="Facebook" src="/images/midias_sociais/facebook.png" style="width: 19px; height: 19px;" title="Facebook" /></a></li>
+                                                                    <li class="leaf first"><a href="https://www.instagram.com/escolalumiart/"><img alt="Instagram" src="/images/midias_sociais/th.jfif" style="width: 19px; height: 19px;" title="Instagram" /></a></li>
+                                                                    @*<li class="leaf"><a href="http://www.twitter.com/EscolaLumiart"><img alt="Twitter" src="/images/midias_sociais/twitter.png" style="width: 20px; height: 19px;" title="Twitter" /></a></li>
+                                                                        <li class="leaf"><a href="https://www.youtube.com/user/EscolaLumiart"><img alt="Youtube" src="/images/midias_sociais/youtube.gif" style="width: 19px; height: 19px;" title="Youtube" /></a></li>
+                                                                        <li class="leaf"><a href="https://www.linkedin.com/company-beta/10790205/"><img alt="Linkedin" src="/images/midias_sociais/icolinkedinazul.gif" style="width: 19px; height: 19px;" title="Linkedin" /></a></li>*@
+                                                                </ul>
+                                                            </div>
+                                                        </div> <!-- /.block -->
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div> <!-- /.block -->
+                        </div>
+                    </div>
+
+                </div>
+                <br />
+                <p>&copy; 2021 - Eunivesp - alunos da Universidade Virtual de São Paulo - Univesp </p>
             </footer>
         </div>
         <!-- /#page-content-wrapper -->
@@ -247,7 +373,7 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
-
+    
     @RenderSection("Scripts", required: false)
 </body>
 </html>

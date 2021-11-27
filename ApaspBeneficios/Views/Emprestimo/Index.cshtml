@@ -1,0 +1,37 @@
+﻿
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EfetuarEmprestimo">
+           
+            <div class="form-group">
+                <label class="control-label">Cliente:</label>
+                <input class="form-control" name="Cliente" id="cliente" value="Edson" />
+
+            </div>
+            <div class="form-group">
+                <label class="control-label">Livro:</label>
+                <input class="form-control" name="Livro" id="livro" value="Asp.net"/>
+
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+    $("#cliente").autocomplete({
+        source: '@Url.Action("PesquisarClientes","Emprestimo")',
+        minlength: 3
+    });
+
+    $("#livro").autocomplete({
+        source: '@Url.Action("PesquisarLivros","Emprestimo")',
+        minlength: 3
+    });
+    </script>
+}

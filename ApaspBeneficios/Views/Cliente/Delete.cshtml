@@ -1,0 +1,57 @@
+﻿@model EscolaLumiart.Models.Dtos.ClienteDto
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Você deseja realmente excluir esse cliente?</h3>
+<div>
+ 
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Cpf)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Cpf)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Fone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Fone)
+        </dd>
+        @*<dt>
+            @Html.DisplayNameFor(model => model.StatusClienteId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StatusClienteId)
+        </dd>*@
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Excluir" class="btn btn-default" /> |
+        <a asp-action="List">Voltar</a>
+    </form>
+</div>

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<EscolaLumiart.Models.Dtos.LivroDto>
+
+
+@{
+    ViewData["Title"] = "Acervo";
+}
+
+<h2>Acervo</h2>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Autor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Editora)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.StatusLivroId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Autor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Editora)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.StatusLivroId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>*@
+                <td>
+
+                    <a asp-action="Emprestimo" asp-route-id="@item.Id">Emprestimo</a>
+                   
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

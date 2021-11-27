@@ -1,0 +1,35 @@
+﻿@model EscolaLumiart.Models.Dtos.LivroDto
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Detalhes</h2>
+
+<div>
+   
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Autor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Autor)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Editora)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Editora)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Atualizar</a> |
+    <a asp-action="List">Voltar</a>
+</div>

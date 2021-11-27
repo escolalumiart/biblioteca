@@ -51,6 +51,7 @@ ul::-webkit-scrollbar {
     max-width: 1170px;
 }
 
+
 @media only screen and (max-width: 76.25em) {
     .container {
         padding: 0 1.5rem;
@@ -1419,7 +1420,7 @@ body {
 }
 
 .cta-form__conteudo__texto {
-    max-width: 50%;
+    max-width: 60%;
     padding-right: 15px;
     padding-top: 50px;
     position: relative;
